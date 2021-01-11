@@ -8,8 +8,8 @@ Teleport to Mordion Gaol
 - [ ] Load Library
 - [ ] Code Patch
 
-- [x] ~~Memory Reader
-- [x] ~~Memory Writer
-- [x] ~~Memory Free&Alloc
-- [x] ~~Sig Scanner
-- [x] ~~Remote Code Execution
+- [x] Memory Reader
+- [x] Memory Writer
+- [x] Memory Free&Alloc
+- [x] Sig Scanner
+- [x] Remote Code Execution
