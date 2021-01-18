@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zodiark", "Zodiark\Zodiark.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zodiark.Test", "Zodiark.Test\Zodiark.Test.csproj", "{76194E69-7D3B-4532-8174-6EDEF8705CE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zodiark.Namazu", "Zodiark.Namazu\Zodiark.Namazu.csproj", "{192D01F5-428C-4EAF-81F9-3033A66687F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76194E69-7D3B-4532-8174-6EDEF8705CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76194E69-7D3B-4532-8174-6EDEF8705CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76194E69-7D3B-4532-8174-6EDEF8705CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192D01F5-428C-4EAF-81F9-3033A66687F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192D01F5-428C-4EAF-81F9-3033A66687F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192D01F5-428C-4EAF-81F9-3033A66687F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192D01F5-428C-4EAF-81F9-3033A66687F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
