@@ -57,21 +57,18 @@
     <Compile Include="Preset.cs" />
     <Compile Include="Namazu.cs" />
     <Compile Include="Waymark.cs" />
-    <Compile Include="Zodiark\ExtensionMethods.cs" />
-    <Compile Include="Zodiark\Injection\AsmCache.cs" />
-    <Compile Include="Zodiark\Injection\Injection.cs" />
-    <Compile Include="Zodiark\Injection\RemoteCall.cs" />
-    <Compile Include="Zodiark\Memory\ProcessMemory.cs" />
-    <Compile Include="Zodiark\Native.cs" />
-    <Compile Include="Zodiark\Patch\Patch.cs" />
-    <Compile Include="Zodiark\Scanner\SignatureScanner.cs" />
-    <Compile Include="Zodiark\Zodiark.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zodiark\Zodiark.csproj">
+      <Project>{557339f5-a4f3-42a9-bd77-8736279bfa33}</Project>
+      <Name>Zodiark</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />

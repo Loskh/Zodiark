@@ -24,7 +24,9 @@ namespace Zodiark.Namazu
 
         public Namazu()
         {
-            process = Process.GetProcessesByName("ffxiv_dx11")[0];
+            var list = Process.GetProcessesByName("ffxiv_dx11");
+            if (list.Length == 0) throw new Exception("未找到游戏进程。");
+            process = list[0];
             Mordion = new ZodiarkProcess(process);
             Offsets = new Offsets(Mordion);
         }
