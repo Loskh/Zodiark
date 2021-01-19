@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Advanced_Combat_Tracker;
+using FFXIV_ACT_Plugin.Common;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -17,17 +20,39 @@ namespace Zodiark.Namazu
 
     public class Namazu
     {
-        private Process process;
+        public Process process { get; private set; }
+        private static readonly object Lock = new object();
         private ZodiarkProcess Mordion;
         private Offsets Offsets;
-        private static readonly Lazy<Namazu> lazy = new Lazy<Namazu>();
-        public static Namazu Instance { get => lazy.Value; }
+        private static Namazu instance;
+        //private static Namazu instance;
+
+        public static Namazu Instance
+        {
+            get
+            {
+                if (instance == null || instance.process.Id != repository.GetCurrentFFXIVProcess().Id)
+                {
+                    lock (Lock)
+                    {
+                        if (instance == null || instance.process.Id != repository.GetCurrentFFXIVProcess().Id)
+                            instance = new Namazu();
+                    }
+                }
+                return instance;
+            }
+            private set
+            {
+                instance = value;
+            }
+        }
+
+        public static IDataSubscription subscription { get; private set; }
+        public static IDataRepository repository { get; private set; }
 
         private Namazu()
         {
-            var list = Process.GetProcessesByName("ffxiv_dx11");
-            if (list.Length == 0) throw new Exception("未找到游戏进程。请在游戏启动后添加插件/打开ACT。");
-            process = list[0];
+            process = repository.GetCurrentFFXIVProcess();
             Mordion = new ZodiarkProcess(process);
             Offsets = new Offsets(Mordion);
         }
@@ -154,6 +179,39 @@ namespace Zodiark.Namazu
             preset.Four = ReadWaymark(wayFour, WaymarkID.Four);
 
             return preset;
+        }
+
+        static Namazu()
+        {
+            repository = GetRepository();
+            subscription = GetSubscription();
+        }
+
+        private static IDataSubscription GetSubscription()
+        {
+            if (subscription != null)
+                return subscription;
+            var FFXIV = ActGlobals.oFormActMain.ActPlugins.FirstOrDefault(x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
+            if (FFXIV != null && FFXIV.pluginObj != null)
+            {
+                subscription = (IDataSubscription)FFXIV.pluginObj.GetType().GetProperty("DataSubscription").GetValue(FFXIV.pluginObj);
+            }
+
+            return subscription;
+        }
+
+        private static IDataRepository GetRepository()
+        {
+            if (repository != null)
+                return repository;
+
+            var FFXIV = ActGlobals.oFormActMain.ActPlugins.FirstOrDefault(x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
+            if (FFXIV != null && FFXIV.pluginObj != null)
+            {
+                repository = (IDataRepository)FFXIV.pluginObj.GetType().GetProperty("DataRepository").GetValue(FFXIV.pluginObj);
+            }
+
+            return repository;
         }
     }
 }

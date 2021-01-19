@@ -36,14 +36,21 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Advanced Combat Tracker">
+      <HintPath>E:\Program Files\ACT国服整合\Advanced Combat Tracker.dll</HintPath>
+    </Reference>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="FFXIV_ACT_Plugin.Common">
+      <HintPath>C:\Users\xings\Downloads\FFXIV_ACT_Plugin_SDK_2.0.7.4\SDK\FFXIV_ACT_Plugin.Common.dll</HintPath>
     </Reference>
     <Reference Include="Iced, Version=1.10.0.0, Culture=neutral, PublicKeyToken=5baba79f4264913b, processorArchitecture=MSIL">
       <HintPath>..\packages\Iced.1.10.0\lib\net45\Iced.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
