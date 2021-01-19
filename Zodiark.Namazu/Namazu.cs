@@ -20,11 +20,13 @@ namespace Zodiark.Namazu
         private Process process;
         private ZodiarkProcess Mordion;
         private Offsets Offsets;
+        private static readonly Lazy<Namazu> lazy = new Lazy<Namazu>();
+        public static Namazu Instance { get => lazy.Value; }
 
-        public Namazu()
+        private Namazu()
         {
             var list = Process.GetProcessesByName("ffxiv_dx11");
-            if (list.Length == 0) throw new Exception("未找到游戏进程。");
+            if (list.Length == 0) throw new Exception("未找到游戏进程。请在游戏启动后添加插件/打开ACT。");
             process = list[0];
             Mordion = new ZodiarkProcess(process);
             Offsets = new Offsets(Mordion);
