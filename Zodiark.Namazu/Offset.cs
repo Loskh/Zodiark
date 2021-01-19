@@ -24,7 +24,6 @@ namespace Zodiark.Namazu
             Waymarks = Process.Scanner.GetStaticAddressFromSig("48 8B 94 24 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 41 B0 01") + 432;
             //uiModule = scanner.ReadIntPtr(scanner.ReadIntPtr(uiModulePtr));
             //raptureModule = uiModule + moduleOffset;
-
         }
 
         public override string ToString()
