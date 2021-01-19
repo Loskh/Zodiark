@@ -1,5 +1,4 @@
-﻿using Iced.Intel;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -116,6 +115,43 @@ namespace Zodiark.Namazu
             });
 
             WaymarkThread.Start();
+        }
+
+        public Preset ReadWaymark()
+        {
+            var preset = new Preset();
+
+            // pointers for waymark positions
+            var wayA = Offsets.Waymarks + 0x00;
+            var wayB = Offsets.Waymarks + 0x20;
+            var wayC = Offsets.Waymarks + 0x40;
+            var wayD = Offsets.Waymarks + 0x60;
+            var wayOne = Offsets.Waymarks + 0x80;
+            var wayTwo = Offsets.Waymarks + 0xA0;
+            var wayThree = Offsets.Waymarks + 0xC0;
+            var wayFour = Offsets.Waymarks + 0xE0;
+
+            // ReadWaymark local function to read multiple waymarks with.
+            Waymark ReadWaymark(IntPtr addr, WaymarkID id) => new Waymark
+            {
+                X = Mordion.Memory.Read<float>(addr),
+                Y = Mordion.Memory.Read<float>(addr + 0x4),
+                Z = Mordion.Memory.Read<float>(addr + 0x8),
+                Active = Mordion.Memory.Read<Byte>(addr + 0x1C) == 1,
+                ID = id
+            };
+
+            // Read waymarks in with our function.
+            preset.A = ReadWaymark(wayA, WaymarkID.A);
+            preset.B = ReadWaymark(wayB, WaymarkID.B);
+            preset.C = ReadWaymark(wayC, WaymarkID.C);
+            preset.D = ReadWaymark(wayD, WaymarkID.D);
+            preset.One = ReadWaymark(wayOne, WaymarkID.One);
+            preset.Two = ReadWaymark(wayTwo, WaymarkID.Two);
+            preset.Three = ReadWaymark(wayThree, WaymarkID.Three);
+            preset.Four = ReadWaymark(wayFour, WaymarkID.Four);
+
+            return preset;
         }
     }
 }
